@@ -108,6 +108,9 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -117,6 +120,9 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   transition: background-color var(--transition-normal), color var(--transition-normal);
   background-image: 
     radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
@@ -165,43 +171,46 @@ body {
 .ambient-glow {
   position: fixed;
   border-radius: 50%;
-  filter: blur(140px);
+  filter: blur(55px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.35;
+  opacity: 0.32;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  contain: paint;
   animation: pulseGlow 14s ease-in-out infinite alternate;
 }
 
 .glow-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%);
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.4) 0%, rgba(0, 240, 255, 0.08) 50%, transparent 70%);
   top: -120px;
   left: -120px;
 }
 
 .glow-2 {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, var(--neon-purple) 0%, transparent 70%);
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 70%);
   top: 40%;
   right: -150px;
   animation-duration: 18s;
 }
 
 .glow-3 {
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, var(--neon-magenta) 0%, transparent 70%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.4) 0%, rgba(255, 0, 127, 0.08) 50%, transparent 70%);
   bottom: 5%;
   left: 20%;
   animation-duration: 16s;
 }
 
 @keyframes pulseGlow {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.28; }
-  50% { transform: scale(1.18) translate(35px, -25px); opacity: 0.42; }
-  100% { transform: scale(0.92) translate(-30px, 25px); opacity: 0.28; }
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.25; }
+  50% { transform: translate3d(25px, -20px, 0) scale(1.12); opacity: 0.38; }
+  100% { transform: translate3d(-20px, 20px, 0) scale(0.95); opacity: 0.25; }
 }
 
 #particleCanvas {
@@ -284,7 +293,7 @@ body {
   -webkit-text-fill-color: transparent;
   font-size: 1.45rem;
   font-weight: 900;
-  filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+  transform: translateZ(0);
 }
 
 .brand-logo .highlight {
@@ -493,7 +502,8 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-  filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.3));
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
 
 .btn {
@@ -702,7 +712,7 @@ body {
   font-family: var(--font-mono);
   font-weight: 700;
   margin-left: 0.45rem;
-  text-shadow: 0 0 15px var(--neon-cyan-glow);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
 }
 
 .typing-cursor {
@@ -710,7 +720,7 @@ body {
   animation: blink 0.9s infinite;
   font-weight: 700;
   margin-left: 3px;
-  text-shadow: 0 0 10px var(--neon-magenta);
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
 }
 
 @keyframes blink {
@@ -728,8 +738,7 @@ body {
 
 .hero-description strong {
   color: #ffffff;
-  font-weight: 600;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  font-weight: 700;
 }
 
 .hero-cta-group {
@@ -2777,7 +2786,8 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
   box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan-glow);
   transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
   opacity: 0;
@@ -2793,7 +2803,8 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
   box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
   transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
               height 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
