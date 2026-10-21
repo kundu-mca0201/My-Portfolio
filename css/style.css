@@ -2477,6 +2477,57 @@ body {
   }
 
   .about-grid {
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLETS & MOBILE SMARTPHONES)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .nav-links, 
+  .btn-outline-nav {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: flex !important;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.75rem;
+  }
+
+  .status-pill {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-role-wrapper {
+    justify-content: center;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .hero-metrics {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 420px;
+    width: 100%;
+    gap: 1.25rem;
+  }
+
+  .metric-divider {
+    display: none;
+  }
+
+  .about-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2486,89 +2537,263 @@ body {
 }
 
 @media (max-width: 768px) {
-  .nav-links, .btn-outline-nav {
-    display: none;
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
   }
 
-  .mobile-toggle {
-    display: flex;
+  .container {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+
+  .section {
+    padding: 4.5rem 0;
+  }
+
+  .hero-section {
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+    min-height: auto;
   }
 
   .hero-title {
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    letter-spacing: -0.02em;
   }
 
   .hero-role-wrapper {
     font-size: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: auto;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-description {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto 2.5rem auto;
+    gap: 0.85rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 
-  .hero-metrics {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
+  .section-subtitle {
+    font-size: 0.92rem;
   }
 
-  .metric-divider {
-    display: none;
-  }
-
+  /* Mobile Visual Card & Floating Badges */
   .visual-card-wrapper {
-    width: 300px;
-    height: 360px;
+    width: 100%;
+    max-width: 320px;
+    height: 350px;
+    margin: 0 auto;
   }
 
   .central-avatar-card {
-    width: 260px;
-    height: 300px;
+    width: 100%;
+    max-width: 270px;
+    height: 310px;
+    margin: 15px auto;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .floating-badge {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .badge-flutter { top: 0; left: 5px; }
+  .badge-gemini { top: 35px; right: 5px; }
+  .badge-js { bottom: 65px; left: 0px; }
+  .badge-python { bottom: 15px; right: 10px; }
+  .badge-firebase { top: 140px; right: 0px; }
+  .badge-azure { bottom: 10px; left: 15px; }
+
+  /* Narrative & Terminal */
+  .narrative-card {
+    padding: 1.65rem 1.25rem;
+  }
+
+  .narrative-heading {
+    font-size: 1.25rem;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    font-size: 0.78rem;
+  }
+
+  .strengths-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skill-filter-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  /* Project Cards */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1.65rem 1.25rem;
+  }
+
+  .project-title {
+    font-size: 1.35rem;
+  }
+
+  .project-footer {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .project-footer .btn {
+    width: 100%;
+  }
+
+  /* Timeline */
+  .timeline-container {
+    padding: 0.5rem 0;
   }
 
   .timeline-container::before {
-    left: 20px;
+    left: 15px;
   }
 
   .timeline-dot {
-    left: 6px;
+    left: 1px;
     width: 28px;
     height: 28px;
+    font-size: 0.75rem;
   }
 
   .timeline-item {
-    padding-left: 50px;
+    padding-left: 45px;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-content {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .timeline-role {
+    font-size: 1.18rem;
   }
 
   .timeline-header {
     flex-direction: column;
+    gap: 0.5rem;
   }
 
   .timeline-meta {
     align-items: flex-start;
   }
 
-  .strengths-grid {
-    grid-template-columns: 1fr;
+  /* Contact & Form */
+  .contact-card {
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  .contact-val {
+    font-size: 0.88rem;
+  }
+
+  .glass-form {
+    padding: 1.65rem 1.25rem;
+  }
+
+  .footer {
+    padding: 3.5rem 0 2rem 0;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  /* Modal Content Responsive */
+  .modal-content-wrapper {
+    max-height: 94vh;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-top-bar {
+    padding: 1rem 1.25rem;
+  }
+
+  .modal-body-content {
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.15rem;
+    font-size: 1.95rem;
   }
 
-  .projects-grid {
+  .status-pill {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 0.85rem;
+    gap: 0.85rem;
+  }
+
+  .metric-num {
+    font-size: 1.4rem;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+  }
+
+  .certs-grid {
     grid-template-columns: 1fr;
   }
 
-  .project-card {
+  .cert-card {
     padding: 1.5rem 1.25rem;
   }
 
-  .floating-badge {
-    padding: 0.35rem 0.65rem;
-    font-size: 0.72rem;
+  .cert-name {
+    font-size: 1.2rem;
   }
 }
 
