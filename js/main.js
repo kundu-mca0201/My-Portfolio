@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
+
+  // 14. Cyberpunk Neon Custom Cursor Effect
+  initCustomCursor();
 });
 
 /* ==========================================================================
@@ -999,3 +1002,109 @@ customStyle.textContent = `
   }
 `;
 document.head.appendChild(customStyle);
+
+/* ==========================================================================
+   14. CYBERPUNK NEON CUSTOM CURSOR ENGINE
+   ========================================================================== */
+function initCustomCursor() {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+
+  // Disable on touch screens
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let ringX = -100;
+  let ringY = -100;
+  let isMoving = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isMoving) {
+      dot.classList.add('visible');
+      ring.classList.add('visible');
+      ringX = mouseX;
+      ringY = mouseY;
+      isMoving = true;
+    }
+
+    dot.style.left = `${mouseX}px`;
+    dot.style.top = `${mouseY}px`;
+  });
+
+  // Smooth lerp trailing animation for ring
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover detection for interactive targets
+  const interactiveTargets = 'a, button, input, textarea, .project-card, .skill-card, .cert-card, .timeline-content, .pill-btn-sample, .theme-toggle-btn, .brand-logo, .copy-btn, .filter-tab, .skill-filter-btn';
+
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveTargets)) {
+      ring.classList.add('cursor-hover');
+      dot.classList.add('cursor-hover');
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveTargets)) {
+      ring.classList.remove('cursor-hover');
+      dot.classList.remove('cursor-hover');
+    }
+  });
+
+  // Click physics & neon sparks
+  window.addEventListener('mousedown', (e) => {
+    ring.classList.add('cursor-click');
+    createClickSparks(e.clientX, e.clientY);
+  });
+
+  window.addEventListener('mouseup', () => {
+    ring.classList.remove('cursor-click');
+  });
+
+  // Hide when mouse exits window
+  document.addEventListener('mouseleave', () => {
+    dot.classList.remove('visible');
+    ring.classList.remove('visible');
+    isMoving = false;
+  });
+
+  function createClickSparks(x, y) {
+    const colors = ['#00f0ff', '#ff007f', '#8b5cf6', '#00ff88'];
+    for (let i = 0; i < 7; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'cursor-spark';
+      const size = Math.random() * 4 + 3;
+      const angle = (Math.PI * 2 / 7) * i + (Math.random() * 0.4 - 0.2);
+      const distance = Math.random() * 32 + 18;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+
+      spark.style.width = `${size}px`;
+      spark.style.height = `${size}px`;
+      spark.style.left = `${x}px`;
+      spark.style.top = `${y}px`;
+      spark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      spark.style.boxShadow = `0 0 10px ${spark.style.backgroundColor}`;
+      spark.style.setProperty('--dx', `${dx}px`);
+      spark.style.setProperty('--dy', `${dy}px`);
+
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 600);
+    }
+  }
+}
+

@@ -2571,3 +2571,104 @@ body {
     font-size: 0.72rem;
   }
 }
+
+/* ==========================================================================
+   CUSTOM CYBERPUNK NEON CURSOR
+   ========================================================================== */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--neon-cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan-glow);
+  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  opacity: 0;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 0, 127, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+  transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              height 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 0.25s ease, 
+              background-color 0.25s ease, 
+              box-shadow 0.25s ease;
+  opacity: 0;
+}
+
+/* Cursor visible when mouse moves */
+.custom-cursor-dot.visible,
+.custom-cursor-ring.visible {
+  opacity: 1;
+}
+
+/* Cursor on Hovering Links / Interactive Items */
+.custom-cursor-ring.cursor-hover {
+  width: 56px;
+  height: 56px;
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 25px var(--neon-cyan), 0 0 40px var(--neon-cyan-glow);
+}
+
+.custom-cursor-dot.cursor-hover {
+  width: 12px;
+  height: 12px;
+  background-color: var(--neon-magenta);
+  box-shadow: 0 0 15px var(--neon-magenta), 0 0 25px var(--neon-magenta-glow);
+}
+
+/* Cursor on Click */
+.custom-cursor-ring.cursor-click {
+  width: 22px;
+  height: 22px;
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px #ffffff;
+}
+
+/* Click Spark Particles */
+.cursor-spark {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 99997;
+  transform: translate(-50%, -50%);
+  animation: sparkFadeOut 0.6s ease-out forwards;
+}
+
+@keyframes sparkFadeOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Hide custom cursor on touch/mobile devices */
+@media (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-ring,
+  .cursor-spark {
+    display: none !important;
+  }
+}
+
